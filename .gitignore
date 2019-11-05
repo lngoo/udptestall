@@ -1,0 +1,3 @@
+# Project exclude paths
+/udp-base/target/
+/udp-netty/target/
