@@ -31,13 +31,21 @@ public class Server {
             byte[] req = new byte[buf.readableBytes()];
             buf.readBytes(req);
             String body = new String(req, "UTF-8");
-            System.out.println("服务端收到信息：" + body);//打印收到的信息
+            String address = packet.sender().getAddress().toString() + packet.sender().getPort();
+            System.out.println( address + "/"+ ctx.channel().id() +"/"+  "服务端收到信息：" + body);//打印收到的信息
             //向客户端发送消息
-            String json = "(来自服务端: 你的注册请求已处理)";
+            String json = address + ctx.channel().id() + body;
             // 由于数据报的数据是以字符数组传的形式存储的，所以传转数据
             byte[] bytes = json.getBytes("UTF-8");
             DatagramPacket data = new DatagramPacket(Unpooled.copiedBuffer(bytes), packet.sender());
+//            ctx.channel().writeAndFlush(data);
             ctx.writeAndFlush(data);//向客户端发送消息
+        }
+
+        @Override
+        public void channelActive(ChannelHandlerContext ctx) throws Exception {
+            System.out.println("%%%%%%%% channelActive");
+            super.channelActive(ctx);
         }
     }
 }
