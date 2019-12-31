@@ -36,17 +36,17 @@ public class Server {
             String json = address + ctx.channel().id() + body;
             // 由于数据报的数据是以字符数组传的形式存储的，所以传转数据
             byte[] bytes = json.getBytes("UTF-8");
-//            DatagramPacket data = new DatagramPacket(Unpooled.copiedBuffer(bytes), packet.sender());
-//            ctx.channel().writeAndFlush(data);
-            try {
-                Channel channel = ctx.channel();
-                channel.connect(packet.sender());
-                DefaultChannelPromise promise = (DefaultChannelPromise) channel.writeAndFlush(Unpooled.copiedBuffer(bytes)).sync();//向客户端发送消息
-                System.out.println(promise.isSuccess());
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            DatagramPacket data = new DatagramPacket(Unpooled.copiedBuffer(bytes), packet.sender());
+            ctx.channel().writeAndFlush(data);
+//            try {
+//                Channel channel = ctx.channel();
+//                channel.connect(packet.sender());
+//                DefaultChannelPromise promise = (DefaultChannelPromise) channel.writeAndFlush(Unpooled.copiedBuffer(bytes)).sync();//向客户端发送消息
+//                System.out.println(promise.isSuccess());
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
         }
 
         @Override

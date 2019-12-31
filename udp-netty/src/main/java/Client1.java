@@ -12,11 +12,11 @@ import io.netty.util.CharsetUtil;
 import java.net.InetSocketAddress;
 
 
-public class Client {
+public class Client1 {
 
     private static int scanPort = 2555;
 
-    public Client(int scanPort) {
+    public Client1(int scanPort) {
         this.scanPort = scanPort;
     }
 

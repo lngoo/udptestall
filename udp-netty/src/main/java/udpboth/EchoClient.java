@@ -25,10 +25,12 @@ public class EchoClient
             InetAddress address = InetAddress.getByName(netAddress);
             datagramPacket = new DatagramPacket(buf, buf.length, address, PORT);
             datagramSocket.send(datagramPacket);
+//            Counter.send.addAndGet(1);
 
             byte[] receBuf = new byte[1024];
             DatagramPacket recePacket = new DatagramPacket(receBuf, receBuf.length);
             datagramSocket.receive(recePacket);
+//            Counter.receive.addAndGet(1);
 
             // 监听返回数据
             String receStr = null;
@@ -61,7 +63,8 @@ public class EchoClient
                 }
             }).start();
             try {
-                System.out.println(Thread.currentThread().getName() + "-----------/////MAIN-休息3秒//////////, 存活线程数= " + Thread.activeCount());
+                System.out.println(Thread.currentThread().getName() + "---////MAIN-休息3秒//////////, 存活线程数= " + Thread.activeCount());
+//                System.out.println("%%%%%%%%% " + Counter.send.get() + "/" + Counter.receive.get());
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
