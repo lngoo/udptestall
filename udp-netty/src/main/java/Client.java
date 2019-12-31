@@ -14,7 +14,7 @@ import java.net.InetSocketAddress;
 
 public class Client {
 
-    private static int scanPort = 2555;
+    private static int scanPort = 9999;
 
     public Client(int scanPort) {
         this.scanPort = scanPort;
